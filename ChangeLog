@@ -1,0 +1,17 @@
+-- 1.0.14	Changes to run in 6.1.x
+-- 1.0.13	Changes of API calls
+-- 1.0.12	New manual and depends added
+-- 1.0.11	Some Bugfixes, and new Google API
+-- 1.0.10	Insert Zoom-Level 16 and 17
+-- 1.0.9	Upload again because TER doesn't found the Extension anymore
+-- 1.0.8	Some JavaScript errors are fixed
+-- 1.0.7	You can now disable the Route To ... From in the Info Window 
+-- 1.0.6	Change rawurlencode to urlencode 
+-- 1.0.5	New Feature: You can choose which map type should be default
+-- 1.0.4	Bugfixes
+-- 1.0.3	Some Bugfixes, New Feature Sidebar, Manual inserting from GeoData
+-- 1.0.2	Bug with caching geo data removed and some changes in manual
+-- 1.0.1	some changes in manual
+-- 1.0.0	initial release
+
+2009-12-09 Paulsen-IT  <service@paulsen-it.de>

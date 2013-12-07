@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'pit_googlemaps'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Google Maps</label>
+			<label index="tt_content.tx_pitgooglemaps_addresses">Your addresses like &quot;Wallstreet 5, New York&quot; (One address per line)</label>
+			<label index="tt_content.tx_pitgooglemaps_width">Width of the Map in pixel</label>
+			<label index="tt_content.tx_pitgooglemaps_height">Height of the Map in pixel</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.0">1</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.1">2</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.2">3</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.3">4</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.4">5</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.5">6</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.6">7</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.7">8</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.8">9</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.9">10</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.10">11</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.11">12</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.12">13</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.13">14</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.14">15</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.15">16</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.16">17</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom">Zoom of the Map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.0">Normal map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.1">Satellite map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.2">Aerial map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.3">Hybrid map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.4">Aerial hybrid map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.5">Physical map</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.6">Satellite 3D map (Only with Plugin)</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype">Map type</label>
+			<label index="tt_content.tx_pitgooglemaps_showsidebar">Should Show Sidebar?</label>
+			<label index="tt_content.tx_pitgooglemaps_showroute">Should Show Route To .. From in InfoWindow?</label>
+			<label index="tt_content.tx_pitgooglemaps_infowindow">Info-Window Content</label>
+			<label index="tt_content.tx_pitgooglemaps_markers">Set markers to Replace Text in the Info-Window (example: &quot;###TELEPHONE###=|+49 (0)12 123456&quot;)</label>
+			<label index="tt_content.tx_pitgooglemaps_geodata">Cache Geodata</label>
+			<label index="tt_content.tx_pitgooglemaps_markericons">Icons for the Markers of the map</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Google Maps</label>
+			<label index="tt_content.tx_pitgooglemaps_addresses">Ihre Addresse z.B. &quot;Wallsteet 5, New York&quot; (Eine Adresse pro Zeile)</label>
+			<label index="tt_content.tx_pitgooglemaps_width">Breite der Karte in Pixel</label>
+			<label index="tt_content.tx_pitgooglemaps_height">Höhe der Karte in Pixel</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.0">1</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.1">2</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.2">3</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.3">4</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.4">5</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.5">6</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.6">7</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.7">8</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.8">9</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.9">10</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.10">11</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.11">12</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.12">13</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.13">14</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.14">15</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.15">16</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom.I.16">17</label>
+			<label index="tt_content.tx_pitgooglemaps_zoom">Zoom der Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.0">Normale Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.1">Satelliten Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.2">Aerial Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.3">Hybrid Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.4">Aerial Hybrid Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.5">Gelände Karte</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype.I.6">Satelliten 3D Karte (Geht nur mit Plugin)</label>
+			<label index="tt_content.tx_pitgooglemaps_showtype">Karten Typ</label>
+			<label index="tt_content.tx_pitgooglemaps_showsidebar">Soll die Sidebar angeziegt werden?</label>
+			<label index="tt_content.tx_pitgooglemaps_showroute">Soll Route Zu .. Nach im InfoWindow angezeigt werden?</label>
+			<label index="tt_content.tx_pitgooglemaps_infowindow">Info-Fenster Inhalt</label>
+			<label index="tt_content.tx_pitgooglemaps_markers">Gebe hier Marker an die im Info-Fenster ersetzt werden sollen (Beispiel: &quot;###TELEPHONE###=+49 (0)12 123456|###WWW###http://www.domain.de&quot;)</label>
+			<label index="tt_content.tx_pitgooglemaps_geodata">Cache Geodaten</label>
+			<label index="tt_content.tx_pitgooglemaps_markericons">Icons für die Marker auf der Karte</label>
+		</languageKey>
+	</data>
+</T3locallang>

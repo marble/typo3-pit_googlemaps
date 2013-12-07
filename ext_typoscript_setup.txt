@@ -1,0 +1,12 @@
+plugin.tx_pitgooglemaps_pi1 {
+    googleAPIKey = {$plugin.tx_pitgooglemaps_pi1.googleAPIKey}
+
+
+// Default CSS styling
+	_CSS_DEFAULT_STYLE (
+	.pit_googlemaps-sidebar {padding:5px;}
+	.pit_googlemaps-map-withsidebar {float:left; margin-right:10px;}
+	.tx-pitgooglemaps-pi1 {overflow:hidden;}
+	)
+	
+}

@@ -1,0 +1,6 @@
+plugin.tx_pitgooglemaps_pi1 {
+    # cat=plugin.tx_pitgooglemaps - Vars//; type=string; label=Google API key
+    googleAPIKey = 
+}
+
+
