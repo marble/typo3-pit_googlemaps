@@ -180,6 +180,9 @@ $tempColumns = array (
 
 t3lib_div::loadTCA('tt_content');
 t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns, 1);
-//t3lib_extMgm::addToAllTCAtypes('tt_content','tx_pitgooglemaps_addresses;;;;1-1-1, tx_pitgooglemaps_width, tx_pitgooglemaps_height, tx_pitgooglemaps_zoom, tx_pitgooglemaps_infowindow;;;richtext[]:rte_transform[mode=ts], tx_pitgooglemaps_markers, tx_pitgooglemaps_geodata');
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='tx_pitgooglemaps_addresses,tx_pitgooglemaps_width, tx_pitgooglemaps_height, tx_pitgooglemaps_zoom, tx_pitgooglemaps_showsidebar, tx_pitgooglemaps_showroute, tx_pitgooglemaps_showtype, tx_pitgooglemaps_infowindow;;;richtext[]:rte_transform[mode=ts], tx_pitgooglemaps_markers, tx_pitgooglemaps_markericons';
+// t3lib_extMgm::addToAllTCAtypes('tt_content','tx_pitgooglemaps_addresses;;;;1-1-1, tx_pitgooglemaps_width, tx_pitgooglemaps_height, tx_pitgooglemaps_zoom, ' .
+//     'tx_pitgooglemaps_infowindow;;;richtext[]:rte_transform[mode=ts], tx_pitgooglemaps_markers, tx_pitgooglemaps_geodata');
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='tx_pitgooglemaps_addresses,tx_pitgooglemaps_width, tx_pitgooglemaps_height, tx_pitgooglemaps_zoom, ' .
+    'tx_pitgooglemaps_showsidebar, tx_pitgooglemaps_showroute, tx_pitgooglemaps_showtype, tx_pitgooglemaps_infowindow;;;richtext[]:rte_transform[mode=ts], tx_pitgooglemaps_markers, ' .
+    'tx_pitgooglemaps_markericons';
 ?>
