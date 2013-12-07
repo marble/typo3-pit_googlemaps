@@ -52,8 +52,8 @@ class tx_pitgooglemaps_pi1_wizicon {
 
 		$wizardItems['plugins_tx_pitgooglemaps_pi1'] = array(
 			'icon'=>t3lib_extMgm::extRelPath('pit_googlemaps').'pi1/ce_wiz.gif',
-			'title'=>$LANG->getLLL('pi1_title',$LL),
-			'description'=>$LANG->getLLL('pi1_plus_wiz_description',$LL),
+			'title'=>$LANG->getLLL('pi1_title', $LL),
+			'description'=>$LANG->getLLL('pi1_plus_wiz_description', $LL),
 			'params'=>'&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=pit_googlemaps_pi1'
 			);
 
@@ -70,7 +70,7 @@ class tx_pitgooglemaps_pi1_wizicon {
 			$llFile = t3lib_extMgm::extPath('pit_googlemaps').'locallang.xml';
 			$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
 		} catch (Exception $e) {
-			$LOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('pit_googlemaps') . 'locallang.xml',$GLOBALS['LANG']->lang);
+			$LOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('pit_googlemaps') . 'locallang.xml', $GLOBALS['LANG']->lang);
 		}
 
 		return $LOCAL_LANG;

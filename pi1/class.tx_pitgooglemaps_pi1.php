@@ -89,7 +89,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 					$newGeoData[$k]['cacheAddress'] = trim($v);
 					$newGeoData[$k]['geoData'] = $this->geoGetCoords(trim($v));
 					if(!is_array($newGeoData[$k]['geoData']))
-						$newGeoData[$k]['geoData'] = $this->geoGetCoords(trim($v),'YAHOO');
+						$newGeoData[$k]['geoData'] = $this->geoGetCoords(trim($v), 'YAHOO');
 					if(!is_array($newGeoData[$k]['geoData']))
 						{
 						$newGeoData[$k]['geoData']['lon'] = 0.00;
@@ -198,8 +198,8 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 				$lons[] = $gd['geoData']['lon'];
 				$lats[] = $gd['geoData']['lat'];
 				}
-			sort($lons,SORT_NUMERIC);
-			sort($lats,SORT_NUMERIC);
+			sort($lons, SORT_NUMERIC);
+			sort($lats, SORT_NUMERIC);
 		
 			$biggestlon = array_pop($lons);
 			$biggestlat = array_pop($lats);
@@ -207,8 +207,8 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			$smallestlon = array_shift($lons);
 			$smallestlat = array_shift($lats);
 		
-			return array(	'lon' => round(($biggestlon+$smallestlon)/2,3),
-							'lat' => round(($biggestlat+$smallestlat)/2,3)
+			return array(	'lon' => round(($biggestlon+$smallestlon)/2, 3),
+							'lat' => round(($biggestlat+$smallestlat)/2, 3)
 							);
 			}
 		elseif(is_array($geodata) && count($geodata) == 1)
@@ -241,9 +241,9 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 				{
 				$htmlInfo = $this->infowindow;
 				foreach($this->marker[$k] as $key=>$value)
-					$htmlInfo = str_replace($key,$value,$htmlInfo);
-				$htmlInfo = str_replace(array("\r","\n","\r\n","\n\r"),'',$htmlInfo);
-				$htmlInfo = str_replace("'","\\'",$htmlInfo);
+					$htmlInfo = str_replace($key, $value, $htmlInfo);
+				$htmlInfo = str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $htmlInfo);
+				$htmlInfo = str_replace("'", "\\'", $htmlInfo);
 				}			
 			// The Icon would be created for Google, if some exists
 			if(is_array($this->markerImages))
@@ -359,7 +359,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 					';
 		
 		// Splitting Informations
-		$this->addresses = explode("\n",$this->cObj->data['tx_pitgooglemaps_addresses']);
+		$this->addresses = explode("\n", $this->cObj->data['tx_pitgooglemaps_addresses']);
 		
 		// Clean Adresses from Breaks and empty Lines
 		foreach($this->addresses as $addr)
@@ -374,26 +374,26 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		// If User have set geodata manual
 		foreach($this->addresses as $k=>$add)
 			{
-			$userGeo = strstr($add,'|');
+			$userGeo = strstr($add, '|');
 			if(!($userGeo===false))
 				{
-				$this->userGeoData[$k] = explode('|',$userGeo);
-				$this->addresses[$k] = substr($add,0,strpos($add,'|'));
+				$this->userGeoData[$k] = explode('|', $userGeo);
+				$this->addresses[$k] = substr($add, 0, strpos($add, '|'));
 				} 
 			}
 		//var_dump($this->userGeoData);
-		$markers = explode("\n",$this->cObj->data['tx_pitgooglemaps_markers']);
+		$markers = explode("\n", $this->cObj->data['tx_pitgooglemaps_markers']);
 		$this->infowindow = $this->cObj->data['tx_pitgooglemaps_infowindow'];
-		$this->markerImages = explode(',',$this->cObj->data['tx_pitgooglemaps_markericons']);
+		$this->markerImages = explode(',', $this->cObj->data['tx_pitgooglemaps_markericons']);
 		
 		// Getting markers in right form
 		$m = array();
 		foreach($markers as $x)
-			array_push($m,explode('|',$x));
+			array_push($m, explode('|', $x));
 		foreach($m as $k=>$v)
 			foreach($v as $x)
 				{
-				$z = explode('=',$x);
+				$z = explode('=', $x);
 				$this->marker[$k][$z[0]] = trim($z[1]);
 				}
 		
