@@ -49,24 +49,26 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 */
 	private function checkSameAddresses() {
 		$geodata = unserialize($this->geocache);
-		if(is_array($geodata))
-			{
+		if (is_array($geodata)) {
 			$allOk = TRUE;
-			if(count($geodata) <> count($this->addresses))
+			if (count($geodata) <> count($this->addresses)) {
 				$allOk = FALSE;
-			foreach($geodata as $k=>$v)
-				{
-				if(trim($this->addresses[$k]) <> $v['cacheAddress'])
+            }
+			foreach($geodata as $k=>$v) {
+				if(trim($this->addresses[$k]) <> $v['cacheAddress']) {
 					$allOk = FALSE;
-				if($v['geoData']['lon'] == 0 && $v['geoData']['lat'] == 0)
+                }
+				if($v['geoData']['lon'] == 0 && $v['geoData']['lat'] == 0) {
 					$allOk = FALSE;
-				}
-			if(!$allOk)
-				$this->getNewGeoData();
+                }
 			}
-		else
+			if (!$allOk) {
+				$this->getNewGeoData();
+            }
+		} else {
 			$this->getNewGeoData();
-		}
+        }
+	}
 	
 	/**
 	 * If the addresses in Backend change we need to get new Geocache Data
