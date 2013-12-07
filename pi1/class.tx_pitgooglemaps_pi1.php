@@ -47,8 +47,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * This function checks if the Addresses of the Backend Plugin are changed so we need new geodata
 	 * @return unknown_type
 	 */
-	private function checkSameAddresses()
-		{
+	private function checkSameAddresses() {
 		$geodata = unserialize($this->geocache);
 		if(is_array($geodata))
 			{
@@ -73,8 +72,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * If the addresses in Backend change we need to get new Geocache Data
 	 * @return nothing
 	 */
-	private function getNewGeoData()
-		{
+	private function getNewGeoData() {
 		foreach($this->addresses as $k=>$v)
 			{
 			if(trim($v)<>'')
@@ -114,8 +112,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * @param string $address
 	 * @param string $service
 	 */
-	private function geoGetCoords($address, $service = 'GOOGLE')
-		{
+	private function geoGetCoords($address, $service = 'GOOGLE') {
 		// Pre-set result
 		$_result = FALSE;
 		// Do work according to chosen lookup service
@@ -188,8 +185,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * The center position of Google Maps is needed, here we calculate it
 	 * @return array
 	 */
-	private function gettingCenterOfMap()
-		{
+	private function gettingCenterOfMap() {
 		$geodata = unserialize($this->geocache);
 		if(is_array($geodata) && count($geodata) > 1)
 			{
@@ -223,8 +219,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * Google needs some JavaScript to generate the Point (Markers) on Maps, here the JS-Code will be generated
 	 * @return string
 	 */
-	private function gettingJSforPointers()
-		{
+	private function gettingJSforPointers() {
 		$geodata = unserialize($this->geocache);
 		$js = '';
 		$jsIcon .= '';
@@ -288,8 +283,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		return $js;
 		}
 		
-	function createSidebar()
-		{
+	function createSidebar() {
 		$sidebarContent = '
 			function createSidebar'.$this->uid.'()
 				{
