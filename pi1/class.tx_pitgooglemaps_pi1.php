@@ -41,7 +41,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	var $prefixId      = 'tx_pitgooglemaps_pi1';		// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_pitgooglemaps_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'pit_googlemaps';	// The extension key.
-	var $pi_checkCHash = true;
+	var $pi_checkCHash = TRUE;
 	
 	/**
 	 * This function checks if the Addresses of the Backend Plugin are changed so we need new geodata
@@ -52,15 +52,15 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$geodata = unserialize($this->geocache);
 		if(is_array($geodata))
 			{
-			$allOk = true;
+			$allOk = TRUE;
 			if(count($geodata) <> count($this->addresses))
-				$allOk = false;
+				$allOk = FALSE;
 			foreach($geodata as $k=>$v)
 				{
 				if(trim($this->addresses[$k]) <> $v['cacheAddress'])
-					$allOk = false;
+					$allOk = FALSE;
 				if($v['geoData']['lon'] == 0 && $v['geoData']['lat'] == 0)
-					$allOk = false;
+					$allOk = FALSE;
 				}
 			if(!$allOk)
 				$this->getNewGeoData();
@@ -117,7 +117,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	private function geoGetCoords($address, $service = 'GOOGLE')
 		{
 		// Pre-set result
-		$_result = false;
+		$_result = FALSE;
 		// Do work according to chosen lookup service
 		switch ($service) 
 			{
@@ -144,7 +144,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 					if (preg_match('/<Latitude>(-?\d+\.\d+)<\/Latitude><Longitude>(-?\d+\.\d+)<\/Longitude>/', $_result, $_match)) {
 						$_coords['lon'] = $_match[2];
 						$_coords['lat'] = $_match[1];
-						$_result = true;
+						$_result = TRUE;
 					}
 				}
 				break;
@@ -166,17 +166,17 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 
 				curl_close($curlHandle); // close the connection
 				if($_result<>'') {
-					$resp = json_decode($_result, true);
+					$resp = json_decode($_result, TRUE);
 					if($resp['status']='OK') {
 						$_coords['lon'] = $resp['results'][0]['geometry']['location']['lng'];
 						$_coords['lat'] = $resp['results'][0]['geometry']['location']['lat'];
-						$_result = true;
+						$_result = TRUE;
 					}
 				}
 				break;
 			}
 		
-		// Return coordinates or false
+		// Return coordinates or FALSE
 		if ($_result) 
 			{
 			return $_coords;
@@ -375,7 +375,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		foreach($this->addresses as $k=>$add)
 			{
 			$userGeo = strstr($add, '|');
-			if(!($userGeo===false))
+			if(!($userGeo===FALSE))
 				{
 				$this->userGeoData[$k] = explode('|', $userGeo);
 				$this->addresses[$k] = substr($add, 0, strpos($add, '|'));
