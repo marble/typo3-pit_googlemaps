@@ -1,14 +1,15 @@
 <?php
 
-########################################################################
-# Extension Manager/Repository config file for ext "pit_googlemaps".
-#
-# Auto generated 06-12-2013 20:02
-#
-# Manual updates:
-# Only the data in the array - everything else is removed by next
-# writing. "version" and "dependencies" must not be touched!
-########################################################################
+/* ######################################################################
+ * Extension Manager/Repository config file for ext "pit_googlemaps".
+ *
+ * Auto generated 06-12-2013 20:02
+ *
+ * Manual updates:
+ * Only the data in the array - everything else is removed by next
+ * writing. "version" and "dependencies" must not be touched!
+ * ######################################################################
+ */
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Google Maps',
