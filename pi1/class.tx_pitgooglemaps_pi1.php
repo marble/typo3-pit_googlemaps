@@ -285,34 +285,28 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		
 	function createSidebar() {
 		$sidebarContent = '
-			function createSidebar'.$this->uid.'()
-				{
+			function createSidebar' . $this->uid . '() {
 				var html = "";
-				for (var i = 0; i < marker_'.$this->uid.'.length; i++)
-					{
-					html += \'<a id="marker\'+i+\'" href="javascript:sidebar_click'.$this->uid.'(\'+i+\')" onmouseover="javascript:markerhover_in'.$this->uid.'(\'+i+\')" onmouseout="javascript:markerhover_out'.$this->uid.'(\'+i+\')">\' + markerTitle_'.$this->uid.'[i] + \'</a><br />\';
-					}
-				document.getElementById("sidebar'.$this->uid.'").innerHTML = html;
+				for (var i = 0; i < marker_' . $this->uid . '.length; i++) {
+					html += \'<a id="marker\'+i+\'" href="javascript:sidebar_click' . $this->uid .
+                        '(\'+i+\')" onmouseover="javascript:markerhover_in' . $this->uid .
+                        '(\'+i+\')" onmouseout="javascript:markerhover_out' . $this->uid .
+                        '(\'+i+\')">\' + markerTitle_' . $this->uid . '[i] + \'</a><br />\';
 				}
-			
-			function sidebar_click'.$this->uid.'(id)
-				{
-				window.setTimeout("google.maps.event.trigger(marker_'.$this->uid.'["+id+"],\'click\')", 500);
-				}
-				
-			function markerhover_in'.$this->uid.'(id)
-				{
-				google.maps.event.trigger(marker_'.$this->uid.'[id],\'click\');
-				}
-	
-			function markerhover_out'.$this->uid.'(id)
-				{
-				setTimeout("marker_'.$this->uid.'_"+id+"_InfoWindowHtml.close();",1)
-				
-				}
+				document.getElementById("sidebar' . $this->uid . '").innerHTML = html;
+			}
+			function sidebar_click' . $this->uid . '(id) {
+				window.setTimeout("google.maps.event.trigger(marker_' . $this->uid . '["+id+"],\'click\')", 500);
+			}
+			function markerhover_in' . $this->uid . '(id) {
+				google.maps.event.trigger(marker_' . $this->uid . '[id],\'click\');
+			}
+			function markerhover_out' . $this->uid . '(id) {
+				setTimeout("marker_' . $this->uid . '_"+id+"_InfoWindowHtml.close();",1)
+			}
 			';
 		return $sidebarContent;
-		}
+	}
 		
 	/**
 	 * The main method of the PlugIn
