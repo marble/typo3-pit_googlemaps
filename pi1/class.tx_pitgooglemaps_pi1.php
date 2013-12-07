@@ -59,7 +59,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 				{
 				if(trim($this->addresses[$k]) <> $v['cacheAddress'])
 					$allOk = false;
-				if($v["geoData"]["lon"] == 0 && $v["geoData"]["lat"] == 0)
+				if($v['geoData']['lon'] == 0 && $v['geoData']['lat'] == 0)
 					$allOk = false;
 				}
 			if(!$allOk)
@@ -258,13 +258,13 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 				
 			// The point for google is created
 			$js .= '
-							markerTitle_'.$this->uid.'['.$id.'] = "'.preg_replace("/\r|\n/s", "", $v).'"; 
+							markerTitle_'.$this->uid.'['.$id.'] = "'.preg_replace("/\r|\n/s", '', $v).'";
 							point_'.$this->uid.'['.$id.'] = new google.maps.LatLng('.$gd['geoData']['lat'].','.$gd['geoData']['lon'].');
 							marker_'.$this->uid.'_'.$id.'_Options = {
 								map: map,
 								'.$icon.'
 								position: point_'.$this->uid.'['.$id.'],
-								title: "'.preg_replace("/\r|\n/s", "", $v).'",
+								title: "'.preg_replace("/\r|\n/s", '', $v).'",
 								}
 							marker_'.$this->uid.'['.$id.'] = new google.maps.Marker(marker_'.$this->uid.'_'.$id.'_Options);
 
@@ -337,10 +337,10 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$GLOBALS['TSFE']->additionalHeaderData[].='<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
 		
 		// Make a Div for the Map minimum Height = 100, minimum width = 100
-		$width = (int) $this->cObj->data["tx_pitgooglemaps_width"];
+		$width = (int) $this->cObj->data['tx_pitgooglemaps_width'];
 		if($width < 100)
 			$width = 100;
-		$height = (int) $this->cObj->data["tx_pitgooglemaps_height"];
+		$height = (int) $this->cObj->data['tx_pitgooglemaps_height'];
 		if($height < 100)
 			$height = 100;
 		$this->uid = $this->cObj->data['uid'];
@@ -364,7 +364,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		// Clean Adresses from Breaks and empty Lines
 		foreach($this->addresses as $addr)
 			{
-			$cleanaddr = preg_replace("/\r|\n/s", "", $addr);
+			$cleanaddr = preg_replace("/\r|\n/s", '', $addr);
 			if($cleanaddr <> '')
 				$newAddr[] = $cleanaddr; 
 			}
@@ -416,8 +416,8 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$map_type[5] = 'google.maps.MapTypeId.TERRAIN';
 		$map_type[6] = 'google.maps.MapTypeId.SATELLITE';
 		
-		if( $this->cObj->data["tx_pitgooglemaps_showtype"] >= 0)
-			$map_typeJS = 'map.setMapTypeId('.$map_type[$this->cObj->data["tx_pitgooglemaps_showtype"]].');';
+		if( $this->cObj->data['tx_pitgooglemaps_showtype'] >= 0)
+			$map_typeJS = 'map.setMapTypeId('.$map_type[$this->cObj->data['tx_pitgooglemaps_showtype']].');';
 		
 		$content .= '
 					<script type="text/javascript">
