@@ -75,38 +75,34 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 * @return nothing
 	 */
 	private function getNewGeoData() {
-		foreach($this->addresses as $k=>$v)
-			{
-			if(trim($v)<>'')
-				{
-				if(is_array($this->userGeoData[$k]) && count($this->userGeoData[$k]) == 3)
-					{
+		foreach($this->addresses as $k=>$v) {
+			if (trim($v)<>'') {
+				if (is_array($this->userGeoData[$k]) && count($this->userGeoData[$k]) == 3)	{
 					$newGeoData[$k]['geoData']['lon'] = $this->userGeoData[$k][1];
 					$newGeoData[$k]['geoData']['lat'] = $this->userGeoData[$k][2];
-					}
-				else
-					{
+				} else {
 					$newGeoData[$k]['cacheAddress'] = trim($v);
 					$newGeoData[$k]['geoData'] = $this->geoGetCoords(trim($v));
-					if(!is_array($newGeoData[$k]['geoData']))
+					if (!is_array($newGeoData[$k]['geoData'])) {
 						$newGeoData[$k]['geoData'] = $this->geoGetCoords(trim($v), 'YAHOO');
-					if(!is_array($newGeoData[$k]['geoData']))
-						{
+                    }
+					if (!is_array($newGeoData[$k]['geoData'])) {
 						$newGeoData[$k]['geoData']['lon'] = 0.00;
 						$newGeoData[$k]['geoData']['lat'] = 0.00;
-						}
 					}
 				}
 			}
-		$this->geocache = serialize($newGeoData);
-		$updateArray=array( 'tx_pitgooglemaps_geodata' => $this->geocache,
-							'tstamp' => time(),
-							);
-		$where = 'uid = '.$this->cObj->data['uid'];
-		$query   = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', $where, $updateArray);
-		//$res     = $GLOBALS['TYPO3_DB']->sql(TYPO3_db, $query);
-		$res     = $GLOBALS['TYPO3_DB']->sql_query(TYPO3_db, $query);
 		}
+		$this->geocache = serialize($newGeoData);
+		$updateArray = array(
+            'tx_pitgooglemaps_geodata' => $this->geocache,
+            'tstamp' => time(),
+        );
+		$where = 'uid = '.$this->cObj->data['uid'];
+		$query = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', $where, $updateArray);
+		//$res = $GLOBALS['TYPO3_DB']->sql(TYPO3_db, $query);
+		$res = $GLOBALS['TYPO3_DB']->sql_query(TYPO3_db, $query);
+	}
 	
 	/**
 	 * get geocode lat/lon points for given address from some geocoding service
