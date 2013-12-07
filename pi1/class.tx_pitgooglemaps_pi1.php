@@ -304,7 +304,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			function markerhover_out' . $this->uid . '(id) {
 				setTimeout("marker_' . $this->uid . '_"+id+"_InfoWindowHtml.close();",1)
 			}
-			';
+		';
 		return $sidebarContent;
 	}
 		
