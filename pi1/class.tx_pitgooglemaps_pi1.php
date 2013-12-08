@@ -320,7 +320,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$this->upload = 'uploads/tx_pitgooglemaps/';
 		
 		// Set Google Maps Java-Files to Header
-		$GLOBALS['TSFE']->additionalHeaderData[] .= '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[] = '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
 		
 		// Make a Div for the Map minimum Height = 100, minimum width = 100
 		$width = (int) $this->cObj->data['tx_pitgooglemaps_width'];
