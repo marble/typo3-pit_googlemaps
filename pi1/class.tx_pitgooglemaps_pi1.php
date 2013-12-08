@@ -114,8 +114,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		// Pre-set result
 		$_result = FALSE;
 		// Do work according to chosen lookup service
-		switch ($service) 
-			{
+		switch ($service) {
 			// Yahoo Geocoding API
 			case 'YAHOO':
 				// Compose URL
@@ -168,16 +167,14 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 						$_result = TRUE;
 					}
 				}
-				break;
 			}
 		
 		// Return coordinates or FALSE
-		if ($_result) 
-			{
+		if ($_result) {
 			return $_coords;
-			}
-		return $_result; 
 		}
+		return $_result; 
+	}
 	
 	/**
 	 * The center position of Google Maps is needed, here we calculate it
