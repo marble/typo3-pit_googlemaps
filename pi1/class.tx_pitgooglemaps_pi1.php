@@ -320,53 +320,55 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$this->upload = 'uploads/tx_pitgooglemaps/';
 		
 		// Set Google Maps Java-Files to Header
-		$GLOBALS['TSFE']->additionalHeaderData[].='<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[] .= '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
 		
 		// Make a Div for the Map minimum Height = 100, minimum width = 100
 		$width = (int) $this->cObj->data['tx_pitgooglemaps_width'];
-		if($width < 100)
+		if ($width < 100) {
 			$width = 100;
+        }
 		$height = (int) $this->cObj->data['tx_pitgooglemaps_height'];
-		if($height < 100)
+		if ($height < 100) {
 			$height = 100;
+        }
 		$this->uid = $this->cObj->data['uid'];
-		if($this->cObj->data['tx_pitgooglemaps_showsidebar'])
+		if ($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
 			$mapclass = 'pit_googlemaps-map-withsidebar';
-		else
+        } else {
 			$mapclass = 'pit_googlemaps-map';
+        }
 		$content = '<div class="pit_googlemaps-wrap clearfix">
-						<div class="'.$mapclass.'" id="map_canvas'.$this->uid.'" style="width:'.$width.'px; height:'.$height.'px;"></div>';
+						<div class="' . $mapclass . '" id="map_canvas' . $this->uid . '" style="width:' . $width . 'px; height:' . $height . 'px;"></div>';
 		
-		if($this->cObj->data['tx_pitgooglemaps_showsidebar'])
+		if($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
 			$content .= '
-						<div class="pit_googlemaps-sidebar" id="sidebar'.$this->uid.'"></div>';
+						<div class="pit_googlemaps-sidebar" id="sidebar' . $this->uid . '"></div>';
+        }
 		$content .= '
 					</div>
-					';
+		';
 		
 		// Splitting Informations
 		$this->addresses = explode("\n", $this->cObj->data['tx_pitgooglemaps_addresses']);
 		
 		// Clean Adresses from Breaks and empty Lines
-		foreach($this->addresses as $addr)
-			{
+		foreach($this->addresses as $addr) {
 			$cleanaddr = preg_replace("/\r|\n/s", '', $addr);
-			if($cleanaddr <> '')
-				$newAddr[] = $cleanaddr; 
-			}
+			if ($cleanaddr <> '') {
+				$newAddr[] = $cleanaddr;
+            }
+		}
 		$this->addresses = $newAddr;
 		$this->geocache = $this->cObj->data['tx_pitgooglemaps_geodata'];
 
 		// If User have set geodata manual
-		foreach($this->addresses as $k=>$add)
-			{
+		foreach($this->addresses as $k=>$add) {
 			$userGeo = strstr($add, '|');
-			if(!($userGeo===FALSE))
-				{
+			if (!($userGeo===FALSE)) {
 				$this->userGeoData[$k] = explode('|', $userGeo);
 				$this->addresses[$k] = substr($add, 0, strpos($add, '|'));
-				} 
 			}
+		}
 		//var_dump($this->userGeoData);
 		$markers = explode("\n", $this->cObj->data['tx_pitgooglemaps_markers']);
 		$this->infowindow = $this->cObj->data['tx_pitgooglemaps_infowindow'];
@@ -374,14 +376,15 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		
 		// Getting markers in right form
 		$m = array();
-		foreach($markers as $x)
+		foreach($markers as $x) {
 			array_push($m, explode('|', $x));
-		foreach($m as $k=>$v)
-			foreach($v as $x)
-				{
+        }
+		foreach($m as $k=>$v) {
+			foreach($v as $x) {
 				$z = explode('=', $x);
 				$this->marker[$k][$z[0]] = trim($z[1]);
-				}
+			}
+        }
 		
 		// Checking if geocache is right one to addresses
 		$this->checkSameAddresses();
@@ -393,8 +396,9 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$pointerJS = $this->gettingJSforPointers();
 		
 		// Create Content for the Sidebar 
-		if($this->cObj->data['tx_pitgooglemaps_showsidebar'])
+		if ($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
 			$sidebarContent = $this->createSidebar();
+        }
 		
 		$map_type[0] = 'google.maps.MapTypeId.ROADMAP';
 		$map_type[1] = 'google.maps.MapTypeId.SATELLITE';
@@ -402,39 +406,41 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$map_type[5] = 'google.maps.MapTypeId.TERRAIN';
 		$map_type[6] = 'google.maps.MapTypeId.SATELLITE';
 		
-		if( $this->cObj->data['tx_pitgooglemaps_showtype'] >= 0)
+		if ($this->cObj->data['tx_pitgooglemaps_showtype'] >= 0) {
 			$map_typeJS = 'map.setMapTypeId('.$map_type[$this->cObj->data['tx_pitgooglemaps_showtype']].');';
+        }
 		
 		$content .= '
 					<script type="text/javascript">
 					map = null;
-					var markerIcon_'.$this->uid.' = new Array();
-					var point_'.$this->uid.' = new Array();
-					var marker_'.$this->uid.' = new Array();
-					var markerTitle_'.$this->uid.' = new Array();
+					var markerIcon_' . $this->uid . ' = new Array();
+					var point_' . $this->uid . ' = new Array();
+					var marker_' . $this->uid . ' = new Array();
+					var markerTitle_' . $this->uid . ' = new Array();
 					
-					'.$sidebarContent.'
+					' . $sidebarContent.'
 					
 					function setupMap()
 						{
 							var mapOptions = {
-								center: new google.maps.LatLng('.$mapCenter['lat'].', '.$mapCenter['lon'].'),
-								zoom: '.$this->cObj->data['tx_pitgooglemaps_zoom'].',
+								center: new google.maps.LatLng(' . $mapCenter['lat'].', ' . $mapCenter['lon'].'),
+								zoom: ' . $this->cObj->data['tx_pitgooglemaps_zoom'].',
 								};
 
-							map = new google.maps.Map(document.getElementById("map_canvas'.$this->cObj->data['uid'].'"),mapOptions);
-							map.setZoom('.$this->cObj->data['tx_pitgooglemaps_zoom'].');
-							'.$map_typeJS.'
-        					'.$pointerJS;
-		if($this->cObj->data['tx_pitgooglemaps_showsidebar'])
+							map = new google.maps.Map(document.getElementById("map_canvas' . $this->cObj->data['uid'].'"),mapOptions);
+							map.setZoom(' . $this->cObj->data['tx_pitgooglemaps_zoom'].');
+							' . $map_typeJS . '
+        					' . $pointerJS;
+		if ($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
 			$content .= 	'
-        					createSidebar'.$this->uid.'();
+        					createSidebar' . $this->uid . '();
         					';
-		$content .=			'
+        }
+		$content .=	'
 							}
 					google.maps.event.addDomListener(window, "load", setupMap);
 					</script>
-					';
+		';
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
