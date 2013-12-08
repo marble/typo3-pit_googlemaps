@@ -215,7 +215,9 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	private function gettingJSforPointers() {
 		$geodata = unserialize($this->geocache);
 		$js = '';
-		$jsIcon .= '';
+		$jsIcon = '';
+        $currentIcon = '';
+        $lastIcon = '';
 		asort($this->addresses);
 		$id = -1;
 		if ($this->markerImages[0] <> '') {
@@ -243,7 +245,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
                     $currentIcon = $lastIcon;
                 }
                 if($currentIcon <> '') {
-                    $icon = 'icon: "' . $this->upload.$currentIcon . '",';
+                    $icon = 'icon: "' . $this->upload . $currentIcon . '",';
                 }
 				
 			// The point for google is created
