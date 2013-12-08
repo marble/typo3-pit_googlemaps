@@ -218,63 +218,66 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$jsIcon .= '';
 		asort($this->addresses);
 		$id = -1;
-		if($this->markerImages[0] <> '')
+		if ($this->markerImages[0] <> '') {
 			$lastIcon = $this->markerImages[0];
-		foreach($this->addresses as $k => $v)
-			{
+        }
+		foreach($this->addresses as $k => $v) {
 			$id++;
 			$gd = $geodata[$k];
 			$htmlInfo = '';
-			if(is_array($this->marker[$k]))
-				{
+			if (is_array($this->marker[$k])) {
 				$htmlInfo = $this->infowindow;
-				foreach($this->marker[$k] as $key=>$value)
+				foreach($this->marker[$k] as $key=>$value) {
 					$htmlInfo = str_replace($key, $value, $htmlInfo);
+                }
 				$htmlInfo = str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $htmlInfo);
 				$htmlInfo = str_replace("'", "\\'", $htmlInfo);
-				}			
+			}
+            // mb, 2013-12-08: This logic looks strange. Wrong?
 			// The Icon would be created for Google, if some exists
-			if(is_array($this->markerImages))
+			if (is_array($this->markerImages)) {
 				//if($this->markerImages[$k] <> '')
-					$currentIcon = $this->markerImages[$k];
-				if($currentIcon == '')
-					$currentIcon = $lastIcon;
-				if($currentIcon <> '')
-					{
-					$icon = 'icon: "' . $this->upload.$currentIcon . '",';
-					}
+				$currentIcon = $this->markerImages[$k];
+            }
+                if($currentIcon == '') {
+                    $currentIcon = $lastIcon;
+                }
+                if($currentIcon <> '') {
+                    $icon = 'icon: "' . $this->upload.$currentIcon . '",';
+                }
 				
 			// The point for google is created
 			$js .= '
-							markerTitle_'.$this->uid.'['.$id.'] = "'.preg_replace("/\r|\n/s", '', $v).'";
-							point_'.$this->uid.'['.$id.'] = new google.maps.LatLng('.$gd['geoData']['lat'].','.$gd['geoData']['lon'].');
-							marker_'.$this->uid.'_'.$id.'_Options = {
+							markerTitle_' . $this->uid . '[' . $id . '] = "' . preg_replace("/\r|\n/s", '', $v) . '";
+							point_' . $this->uid . '[' . $id . '] = new google.maps.LatLng(' . $gd['geoData']['lat'] . ',' . $gd['geoData']['lon'] . ');
+							marker_' . $this->uid . '_' . $id . '_Options = {
 								map: map,
-								'.$icon.'
-								position: point_'.$this->uid.'['.$id.'],
-								title: "'.preg_replace("/\r|\n/s", '', $v).'",
-								}
-							marker_'.$this->uid.'['.$id.'] = new google.maps.Marker(marker_'.$this->uid.'_'.$id.'_Options);
+								' . $icon . '
+								position: point_' . $this->uid . '[' . $id . '],
+								title: "' . preg_replace("/\r|\n/s", '', $v) . '",
+							}
+							marker_' . $this->uid . '[' . $id . '] = new google.maps.Marker(marker_' . $this->uid . '_' . $id . '_Options);
 
-							';
-			if($this->cObj->data['tx_pitgooglemaps_showroute'])
+			';
+			if ($this->cObj->data['tx_pitgooglemaps_showroute']) {
 				$js .= '
 								marker_'.$this->uid.'_'.$id.'_InfoWindowHtml = new google.maps.InfoWindow({ content:\''.$htmlInfo.' <p class="tx-pitgooglemaps-pi1_route">Route: <a href="http://maps.google.com/maps?daddr=\'+point_'.$this->uid.'['.$id.']+\'" target="_blank">Hierher</a> - <a href="http://maps.google.com/maps?saddr=\'+point_'.$this->uid.'['.$id.']+\'" target="_blank">Von hier</a></p>\'});
-						';
-			else
+				';
+            } else {
 				$js .= '
 								marker_'.$this->uid.'_'.$id.'_InfoWindowHtml = new google.maps.InfoWindow({ content: \''.$htmlInfo.'\'});
-						';
+				';
+            }
 			$js .= '
-							google.maps.event.addListener(marker_'.$this->uid.'['.$id.'], "click", function() {
-									marker_'.$this->uid.'_'.$id.'_InfoWindowHtml.open(map,marker_'.$this->uid.'['.$id.']);
-								});
+							google.maps.event.addListener(marker_' . $this->uid . '[' . $id . '], "click", function() {
+							    marker_' . $this->uid . '_' . $id . '_InfoWindowHtml.open(map,marker_' . $this->uid . '[' . $id . ']);
+							});
 						
-						';
-			}
-			$js = $jsIcon.$js;
-		return $js;
+			';
 		}
+		$js = $jsIcon . $js;
+		return $js;
+	}
 		
 	function createSidebar() {
 		$sidebarContent = '
