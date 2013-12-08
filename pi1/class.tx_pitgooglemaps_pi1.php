@@ -182,13 +182,11 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	 */
 	private function gettingCenterOfMap() {
 		$geodata = unserialize($this->geocache);
-		if(is_array($geodata) && count($geodata) > 1)
-			{
-			foreach($geodata as $gd)
-				{
+		if (is_array($geodata) && count($geodata) > 1) {
+			foreach($geodata as $gd) {
 				$lons[] = $gd['geoData']['lon'];
 				$lats[] = $gd['geoData']['lat'];
-				}
+			}
 			sort($lons, SORT_NUMERIC);
 			sort($lats, SORT_NUMERIC);
 		
@@ -198,17 +196,17 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			$smallestlon = array_shift($lons);
 			$smallestlat = array_shift($lats);
 		
-			return array(	'lon' => round(($biggestlon+$smallestlon)/2, 3),
-							'lat' => round(($biggestlat+$smallestlat)/2, 3)
-							);
-			}
-		elseif(is_array($geodata) && count($geodata) == 1)
-			{
-			return array(	'lon' => $geodata[0]['geoData']['lon'],
-							'lat' => $geodata[0]['geoData']['lat']
-							);
-			}
+			return array(
+                'lon' => round(($biggestlon+$smallestlon)/2, 3),
+                'lat' => round(($biggestlat+$smallestlat)/2, 3)
+            );
+		} elseif (is_array($geodata) && count($geodata) == 1) {
+			return array(
+                'lon' => $geodata[0]['geoData']['lon'],
+                'lat' => $geodata[0]['geoData']['lat']
+            );
 		}
+	}
 	
 	/**
 	 * Google needs some JavaScript to generate the Point (Markers) on Maps, here the JS-Code will be generated
