@@ -146,7 +146,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			case 'GOOGLE':
 			default:
 				// Compose URL
-				$_url = 'http://maps.google.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false';
+				$_url = 'http://maps.google.com/maps/api/geocode/json?address=' . urlencode($address) . '&sensor=false';
 				$curlHandle = curl_init(); // init curl
 
 				// options
@@ -263,11 +263,14 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			';
 			if ($this->cObj->data['tx_pitgooglemaps_showroute']) {
 				$js .= '
-								marker_'.$this->uid.'_'.$id.'_InfoWindowHtml = new google.maps.InfoWindow({ content:\''.$htmlInfo.' <p class="tx-pitgooglemaps-pi1_route">Route: <a href="http://maps.google.com/maps?daddr=\'+point_'.$this->uid.'['.$id.']+\'" target="_blank">Hierher</a> - <a href="http://maps.google.com/maps?saddr=\'+point_'.$this->uid.'['.$id.']+\'" target="_blank">Von hier</a></p>\'});
+								marker_' . $this->uid . '_' . $id . '_InfoWindowHtml = new google.maps.InfoWindow({ content:\'' . $htmlInfo .
+                                    ' <p class="tx-pitgooglemaps-pi1_route">Route: <a href="http://maps.google.com/maps?daddr=\'+point_' . $this->uid .
+                                    '[' . $id . ']+\'" target="_blank">Hierher</a> - <a href="http://maps.google.com/maps?saddr=\'+point_' . $this->uid .
+                                    '[' . $id . ']+\'" target="_blank">Von hier</a></p>\'});
 				';
             } else {
 				$js .= '
-								marker_'.$this->uid.'_'.$id.'_InfoWindowHtml = new google.maps.InfoWindow({ content: \''.$htmlInfo.'\'});
+								marker_' . $this->uid . '_' . $id . '_InfoWindowHtml = new google.maps.InfoWindow({ content: \'' . $htmlInfo . '\'});
 				';
             }
 			$js .= '
@@ -407,7 +410,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$map_type[6] = 'google.maps.MapTypeId.SATELLITE';
 		
 		if ($this->cObj->data['tx_pitgooglemaps_showtype'] >= 0) {
-			$map_typeJS = 'map.setMapTypeId('.$map_type[$this->cObj->data['tx_pitgooglemaps_showtype']].');';
+			$map_typeJS = 'map.setMapTypeId(' . $map_type[$this->cObj->data['tx_pitgooglemaps_showtype']] . ');';
         }
 		
 		$content .= '
@@ -418,17 +421,17 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 					var marker_' . $this->uid . ' = new Array();
 					var markerTitle_' . $this->uid . ' = new Array();
 					
-					' . $sidebarContent.'
+					' . $sidebarContent . '
 					
 					function setupMap()
 						{
 							var mapOptions = {
-								center: new google.maps.LatLng(' . $mapCenter['lat'].', ' . $mapCenter['lon'].'),
-								zoom: ' . $this->cObj->data['tx_pitgooglemaps_zoom'].',
+								center: new google.maps.LatLng(' . $mapCenter['lat'] . ', ' . $mapCenter['lon'] . '),
+								zoom: ' . $this->cObj->data['tx_pitgooglemaps_zoom'] . ',
 								};
 
-							map = new google.maps.Map(document.getElementById("map_canvas' . $this->cObj->data['uid'].'"),mapOptions);
-							map.setZoom(' . $this->cObj->data['tx_pitgooglemaps_zoom'].');
+							map = new google.maps.Map(document.getElementById("map_canvas' . $this->cObj->data['uid'] . '"),mapOptions);
+							map.setZoom(' . $this->cObj->data['tx_pitgooglemaps_zoom'] . ');
 							' . $map_typeJS . '
         					' . $pointerJS;
 		if ($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
