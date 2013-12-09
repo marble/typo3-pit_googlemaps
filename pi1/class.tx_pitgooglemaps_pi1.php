@@ -42,7 +42,10 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 	var $scriptRelPath = 'pi1/class.tx_pitgooglemaps_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'pit_googlemaps';	// The extension key.
 	var $pi_checkCHash = TRUE;
-	
+
+    var $googleMapsApiV3AllowedLanguages = '';
+    var $data = array();
+
 	/**
 	 * This function checks if the Addresses of the Backend Plugin are changed so we need new geodata
 	 * @return unknown_type
@@ -247,7 +250,7 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
                 if($currentIcon <> '') {
                     $icon = 'icon: "' . $this->upload . $currentIcon . '",';
                 }
-				
+
 			// The point for google is created
 			$js .= '
 							markerTitle_' . $this->uid . '[' . $id . '] = "' . preg_replace("/\r|\n/s", '', $v) . '";
@@ -264,9 +267,9 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			if ($this->cObj->data['tx_pitgooglemaps_showroute']) {
 				$js .= '
 								marker_' . $this->uid . '_' . $id . '_InfoWindowHtml = new google.maps.InfoWindow({ content:\'' . $htmlInfo .
-                                    ' <p class="tx-pitgooglemaps-pi1_route">Route: <a href="http://maps.google.com/maps?daddr=\'+point_' . $this->uid .
-                                    '[' . $id . ']+\'" target="_blank">Hierher</a> - <a href="http://maps.google.com/maps?saddr=\'+point_' . $this->uid .
-                                    '[' . $id . ']+\'" target="_blank">Von hier</a></p>\'});
+                                    ' <p class="tx-pitgooglemaps-pi1_route">' . htmlspecialchars($this->data['route']) . '<a href="http://maps.google.com/maps?daddr=\'+point_' . $this->uid .
+                                    '[' . $id . ']+\'" target="_blank">' . htmlspecialchars($this->data['toHere']) . '</a> - <a href="http://maps.google.com/maps?saddr=\'+point_' . $this->uid .
+                                    '[' . $id . ']+\'" target="_blank">' . htmlspecialchars($this->data['fromHere']) . '</a></p>\'});
 				';
             } else {
 				$js .= '
@@ -321,9 +324,36 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->upload = 'uploads/tx_pitgooglemaps/';
-		
+        $this->googleMapsApiV3AllowedLanguages = ',ar,eu,bg,bn,ca,cs,da,de,el,en,en-AU,en-GB,es,eu,fa,fi,fil,fr,' .
+            'gl,gu,hi,hr,hu,id,it,iw,ja,kn,ko,lt,lv,ml,mr,nl,nn,no,pl,' .
+            'pt,pt-BR,pt-PT,ro,ru,sk,sl,sr,sv,tl,ta,te,th,tr,uk,vi,zh-CN,zh-TW,';
+
+        $this->data = array();
+        $this->data['route'] = $this->pi_getLL('route', 'Route:');
+        if (strlen($this->data['route'])) {
+            $this->data['route'] .= ' ';
+        }
+        $this->data['fromHere'] = $this->pi_getLL('fromHere', 'From here');
+        $this->data['toHere'] = $this->pi_getLL('toHere', 'To here');
+
+        $keys = array();
+        $keys[] = $this->LLkey; // config.language
+        $p = strpos($this->LLkey, '_'); // something like 'de_DE'?
+        if (is_int($p) && $p > 0) {
+            $keys[] = strtolower(substr($this->LLkey, 0, $p));
+        }
+        // this parameter is used to localize the map.
+        // https://www.google.de/search?q=google+maps+api+v3+localization
+        // https://developers.google.com/maps/documentation/javascript/examples/map-language
+        $this->data['googleMapsLanguageParam'] = '';
+        foreach ($keys as $k) {
+            if (stripos($this->googleMapsApiV3AllowedLanguages, ',' . $k . ',') !== FALSE) {
+                $this->data['googleMapsLanguageParam'] = '&language=' . $k;
+            }
+        }
+
 		// Set Google Maps Java-Files to Header
-		$GLOBALS['TSFE']->additionalHeaderData[] = '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[] = '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false' . $this->data['googleMapsLanguageParam'] . '"></script>';
 		
 		// Make a Div for the Map minimum Height = 100, minimum width = 100
 		$width = (int) $this->cObj->data['tx_pitgooglemaps_width'];
@@ -341,7 +371,8 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
 			$mapclass = 'pit_googlemaps-map';
         }
 		$content = '<div class="pit_googlemaps-wrap clearfix">
-						<div class="' . $mapclass . '" id="map_canvas' . $this->uid . '" style="width:' . $width . 'px; height:' . $height . 'px;"></div>';
+						<div class="' . $mapclass . '" id="map_canvas' . $this->uid .
+                        '" style="width:' . $width . 'px; height:' . $height . 'px;"></div>';
 		
 		if($this->cObj->data['tx_pitgooglemaps_showsidebar']) {
 			$content .= '
