@@ -337,10 +337,35 @@ class tx_pitgooglemaps_pi1 extends tslib_pibase {
         $this->data['toHere'] = $this->pi_getLL('toHere', 'To here');
 
         $keys = array();
-        $keys[] = $this->LLkey; // config.language
-        $p = strpos($this->LLkey, '_'); // something like 'de_DE'?
-        if (is_int($p) && $p > 0) {
-            $keys[] = strtolower(substr($this->LLkey, 0, $p));
+        $temp = array(
+            'DE_DE' => 'de',
+            'AT_DE' => 'de',
+            'BE_FR' => 'fr',
+            'BE_NL' => 'nl',
+            'CH_DE' => 'de',
+            'CH_FR' => 'fr',
+            'CN_CN' => 'zh-CN',
+            'FR_FR' => 'fr',
+            'IN_EN' => 'en',
+            'LU_DE' => 'de',
+            'LU_FR' => 'fr',
+            'NL_NL' => 'nl',
+            'RU_RU' => 'ru',
+            'UK_EN' => 'en-GB',
+            'PT_PT' => 'pt',
+            'PL_PL' => 'pl',
+        );
+        $k = $temp[$this->LLkey];
+        if (strlen($k)) {
+            $keys[] = $k;
+        } else {
+            $keys[] = $this->LLkey; // config.language
+        }
+        if (0) { // let's disable this for now
+            $p = strpos($this->LLkey, '_'); // something like 'de_DE'?
+            if (is_int($p) && $p > 0) {
+                $keys[] = strtolower(substr($this->LLkey, 0, $p));
+            }
         }
         // this parameter is used to localize the map.
         // https://www.google.de/search?q=google+maps+api+v3+localization
